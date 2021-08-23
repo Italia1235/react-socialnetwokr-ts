@@ -18,7 +18,9 @@ function App() {
 <div className="content">
 
 <Route  path ="/Dialogs" component ={DialogsPage}/>
-    <Route path ="/MyPage" component ={MyPage}/>
+
+
+    <Route  path ="/MyPage" component ={MyPage}/>
 
     </div>
 
