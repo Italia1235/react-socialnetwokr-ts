@@ -7,21 +7,12 @@
   padding: 10px;
 
 }
+
+
+
+
 .messages{padding: 10px;
 font-family: cursive;
 font-size: larger;
 
-}
-
-.talkPerson{padding: 10px;
-font-family:cursive;
-font-size: larger;
-
-
-
-}
-
-.talkItem{
-  text-decoration: none;
-  color: dimgrey;
 }
