@@ -18,9 +18,11 @@ export const DialogItem = (props:typeTalk) => {
 
 
     
-    <NavLink className={classes.talkItem} to >{props.name}]</NavLink>
+    <NavLink className={classes.talkItem} to >{props.name}</NavLink>
     
 
   
-    )</div>
+    </div>
+
+    
     )}

@@ -1,18 +1,21 @@
 import { Post } from "./Post/post"
 
 import classes from "./WallPosts.module.css"
+import {postDataType} from "../../../redux/state";
 
 
 
 
-export const WallPosts = () => {
+type propsType =
+    {
+        postData: postDataType
+    }
 
-    let postData = [
-        {id:1, post: "I learn React! ", likesCount:12},
-        {id:2, post: "I like my mother :3",likesCount:1 },
-    ]
 
-let postElement = postData.map(t =>( <Post message={t.post} likesCount={t.likesCount}/>
+export const WallPosts = (props:propsType) => {
+
+
+let postElement = props.postData.map(t =>( <Post message={t.post} likesCount={t.likesCount}/>
     ))
 
 

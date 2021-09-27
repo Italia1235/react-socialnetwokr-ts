@@ -1,32 +1,42 @@
-
-import { Route } from 'react-router';
+import {Route} from 'react-router';
 import './App.css';
-import { DialogsPage } from './components/dialogspage/dialogspage';
-import { Header } from './components/header/header';
-import { MyPage } from './components/mypage/mypage';
-import { Navbar } from './components/navbar/navbar';
+import {DialogsPage} from './components/dialogspage/dialogspage';
+import {Header} from './components/header/header';
+import {Navbar} from './components/navbar/navbar';
 
-function App() {
-
-  return (
- 
-    <div className="App">
-     
-    <Header/>
-    
-    <Navbar/>
-<div className="content">
-
-<Route  path ="/Dialogs" component ={DialogsPage}/>
+import {MyPage} from "./components/mypage/mypage";
+import {dialogsDataType, messagesDataType, postDataType, stateType} from "./redux/state";
 
 
-    <Route  path ="/MyPage" component ={MyPage}/>
+type propsType = {
+    postData: postDataType
+    dialogsData: dialogsDataType
+    messagesData: messagesDataType
+    state:stateType
+}
 
-    </div>
 
-    </div>
+function App(props: propsType) {
 
-  )
+    return (
+
+        <div className="App">
+
+            <Header/>
+
+            <Navbar/>
+            <div className="content">
+
+                <Route path="/Dialogs" render={() => <DialogsPage messagesData={props.messagesData} dialogsData={props.dialogsData}/>}/>
+
+
+                <Route path="/MyPage" render={() => <MyPage postData={props.postData}/>}/>
+
+            </div>
+
+        </div>
+
+    )
 
 }
 

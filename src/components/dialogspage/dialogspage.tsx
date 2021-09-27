@@ -2,35 +2,28 @@ import classes from './dialogspage.module.css'
 
 import { DialogItem } from './dialogsitem/dialogsitem'
 import { MessagesItem } from './messagesitem/messagesitem'
+import {dialogsDataType, messagesDataType} from "../../redux/state";
 
 
-let dialogsData =[
-    {id:1,name:"Paul"},
-{id:2,name:"Alex"},
-{id:3,name:"Shon"}
-]
+type PropsType={
+    dialogsData: dialogsDataType
+    messagesData: messagesDataType
+}
 
 
-let messagesData=[
-    {id:1,message:"How are you,budy"},
 
-    {id:2,message:"Whats up bro?"},
-    
-    {id:3,message:"You free today??"},
-]
+export const DialogsPage = (props:PropsType) =>{
 
-let messagesElemets = messagesData.map(t=>(<MessagesItem id={t.id} message={t.message}/>))
+    let messagesElemets = props.messagesData.map(t=>(<MessagesItem id={t.id} message={t.message}/>))
 
-let dilogsElemets =dialogsData.map(t=>(<DialogItem id={t.id} name={t.name}/>))
-
-export const DialogsPage = () =>{ 
+    let dialogsElements = props.dialogsData.map(e=>( <DialogItem  id={e.id} name={e.name}/>))
 
     return (
         <div className={classes.dialogsArea}>
 
-{dilogsElemets}
+ <div>{dialogsElements} </div>
 
-{messagesElemets}
+<div>{messagesElemets} </div>
         </div>
     )
 }
