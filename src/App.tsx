@@ -5,13 +5,11 @@ import {Header} from './components/header/header';
 import {Navbar} from './components/navbar/navbar';
 
 import {MyPage} from "./components/mypage/mypage";
-import {dialogsDataType, messagesDataType, postDataType, stateType} from "./redux/state";
+import { stateType } from './redux/state';
 
 
 type propsType = {
-    postData: postDataType
-    dialogsData: dialogsDataType
-    messagesData: messagesDataType
+    
     state:stateType
 }
 
@@ -25,12 +23,13 @@ function App(props: propsType) {
             <Header/>
 
             <Navbar/>
+          
             <div className="content">
 
-                <Route path="/Dialogs" render={() => <DialogsPage messagesData={props.messagesData} dialogsData={props.dialogsData}/>}/>
+                <Route path="/Dialogs" render={() => <DialogsPage state={props.state.dialogsPage} />}/>
 
 
-                <Route path="/MyPage" render={() => <MyPage postData={props.postData}/>}/>
+                <Route path="/MyPage" render={() => <MyPage state={props.state.profilePage}/>}/>
 
             </div>
 

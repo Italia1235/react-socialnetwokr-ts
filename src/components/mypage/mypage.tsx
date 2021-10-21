@@ -1,12 +1,12 @@
 import classes from './mypage.module.css'
 import { ProfileInfo } from './WallPost/ProfileInfo/profileinfo'
 import { WallPosts } from './WallPost/wallPosts'
-import {postDataType} from "../../redux/state";
+import {ProfilePageType} from "../../redux/state";
 
 
 type propsType =
     {
-    postData: postDataType
+        state:ProfilePageType
 }
 
 export const MyPage = (props:propsType) => {
@@ -17,7 +17,7 @@ export const MyPage = (props:propsType) => {
 
         <ProfileInfo/>
 
-<WallPosts postData={props.postData}/>
+<WallPosts state={props.state}/>
 
         </div>)
 }

@@ -1,10 +1,5 @@
-export type postDataType = {
-    postData:Array<postType>
-}
-export type dialogsDataType = {
-    dialogsData: dialogsType[]
-}
-export type messagesDataType ={messagesData: messagesType[]}
+
+
 export type postType = {
     id:number,
     post:string,
@@ -18,25 +13,38 @@ export type dialogsType={
     id:number,
     name:string
 }
+
+export type ProfilePageType = { 
+    postData: postType[];
+}
+
+export type DialogsPageType = {
+    dialogsData: dialogsType[]
+    messagesData: messagesType[]
+    
+ }
+
 export type  stateType={
-    postData:postDataType
-    dialogsData:dialogsDataType
-    messagesData:messagesDataType
+    profilePage: ProfilePageType,
+    dialogsPage:DialogsPageType
 }
 
 
 
 
-let state = {
+let state:stateType = {
+    profilePage:{
     postData : [
         {id:1, post: "I learn React! ", likesCount:12},
-        {id:2, post: "I like my mother :3",likesCount:1 },
-    ],
+        {id:2, post: "I like my mother :3",likesCount:1 }, ]
+},
+    dialogsPage:
+    {
     dialogsData :[
         {id:1,name:"Paul"},
         {id:2,name:"Alex"},
         {id:3,name:"Shon"}
-    ],
+   ],
     messagesData: [
         {id:1,message:"How are you,budy"},
 
@@ -44,6 +52,7 @@ let state = {
 
         {id:3,message:"You free today??"},
     ]
+}
 }
 
 

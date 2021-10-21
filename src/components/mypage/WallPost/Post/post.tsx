@@ -1,13 +1,10 @@
 
 import classes from './post.module.css'
 
-type Typemessage = { 
-    message:string;
-    likesCount:number;
-}
 
 
-export const Post = (props:Typemessage) => { 
+
+export const Post = (props) => { 
 return(
 <div className={classes.post}>
 
