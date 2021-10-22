@@ -3,7 +3,6 @@ import './App.css';
 import {DialogsPage} from './components/dialogspage/dialogspage';
 import {Header} from './components/header/header';
 import {Navbar} from './components/navbar/navbar';
-
 import {MyPage} from "./components/mypage/mypage";
 import { stateType } from './redux/state';
 
@@ -11,6 +10,8 @@ import { stateType } from './redux/state';
 type propsType = {
     
     state:stateType
+
+   addPost:(postText:string)=>void
 }
 
 
@@ -29,14 +30,13 @@ function App(props: propsType) {
                 <Route path="/Dialogs" render={() => <DialogsPage state={props.state.dialogsPage} />}/>
 
 
-                <Route path="/MyPage" render={() => <MyPage state={props.state.profilePage}/>}/>
+                <Route path="/MyPage" render={() => <MyPage state={props.state.profilePage}  addPost={props.addPost}/>}/>
 
             </div>
 
         </div>
 
     )
-
 }
 
 export default App;
