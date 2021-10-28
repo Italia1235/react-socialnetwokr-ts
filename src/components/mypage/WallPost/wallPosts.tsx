@@ -1,7 +1,7 @@
 import { Post } from "./Post/post"
 import React, { RefObject } from 'react';
 import classes from "./WallPosts.module.css"
-import state, {ProfilePageType} from "../../../redux/state";
+import  {ProfilePageType} from "../../../redux/state";
 
 
 
@@ -9,6 +9,7 @@ type propsType =
     {
        state:ProfilePageType
        addPost:(postText:string)=>void
+       updateNewPostText:(newText:string)=>void
     }
 
 
@@ -21,8 +22,15 @@ let postElement = props.state.postData.map(t =>( <Post message={t.post} likesCou
     
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 let addPost = () =>{
+if(newPostElement.current){
+    props.addPost(newPostElement.current.value)
+    newPostElement.current.value=""
+}
+}   
 
-    props.addPost(newPostElement.current? newPostElement.current.value:"123")
+const onPostChange = ()=>{
+    if(newPostElement.current)
+props.updateNewPostText(newPostElement.current.value)
 }
 
     return ( 
@@ -30,7 +38,7 @@ let addPost = () =>{
 
 
 
-<div><textarea ref={newPostElement} className={classes.textar} placeholder ="Write youre..."></textarea></div>
+<div><textarea onChange={onPostChange} value={props.state.newPostText} ref={newPostElement} className={classes.textar} placeholder ="Write youre..."></textarea></div>
 <div ><button onClick={addPost} className={classes.button}>Add post</button>     </div>
 
 {postElement}

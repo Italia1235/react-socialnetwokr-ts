@@ -1,4 +1,8 @@
 
+let rerenderTree = ()=>{
+    console.log(123)
+}
+
 
 export type postType = {
     id:number,
@@ -16,6 +20,7 @@ export type dialogsType={
 
 export type ProfilePageType = { 
     postData: postType[];
+    newPostText: string
 }
 
 export type DialogsPageType = {
@@ -32,11 +37,12 @@ export type  stateType={
 
 
 
-let state:stateType = {
+export const state:stateType = {
     profilePage:{
     postData : [
         {id:1, post: "I learn React! ", likesCount:12},
-        {id:2, post: "I like my mother :3",likesCount:1 }, ]
+        {id:2, post: "I like my mother :3",likesCount:1 }, ],
+        newPostText: ""
 },
     dialogsPage:
     {
@@ -55,13 +61,21 @@ let state:stateType = {
 }
 }
 
-export const addPost =(postText:string)=>{
+export const addPost =()=>{
    const newPost: postType = {id:5, 
-    post: postText, likesCount:0}
+    post: state.profilePage.newPostText, likesCount:0}
    
    
     state.profilePage.postData.push(newPost)
+    rerenderTree()
 }
 
+
+
+
+export const updateNewPostText = (newText:string)=>{
+state.profilePage.newPostText=newText
+rerenderTree()
+}
 
 export default state

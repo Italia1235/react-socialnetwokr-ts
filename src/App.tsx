@@ -10,7 +10,7 @@ import { stateType } from './redux/state';
 type propsType = {
     
     state:stateType
-
+    updateNewPostText:(newText:string)=>void
    addPost:(postText:string)=>void
 }
 
@@ -30,7 +30,7 @@ function App(props: propsType) {
                 <Route path="/Dialogs" render={() => <DialogsPage state={props.state.dialogsPage} />}/>
 
 
-                <Route path="/MyPage" render={() => <MyPage state={props.state.profilePage}  addPost={props.addPost}/>}/>
+                <Route path="/MyPage" render={() => <MyPage profilePage={props.state.profilePage}  addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
 
             </div>
 
