@@ -1,36 +1,33 @@
 import { Post } from "./Post/post"
-import React, { RefObject } from 'react';
+import React from 'react';
 import classes from "./WallPosts.module.css"
-import  {ProfilePageType} from "../../../redux/state";
+import  {ProfilePageType,ActionsTypes} from "../../../redux/state";
 
 
 
 type propsType =
     {
        state:ProfilePageType
-       addPost:(postText:string)=>void
-       updateNewPostText:(newText:string)=>void
+       dispatch:(action:ActionsTypes)=>void
     }
 
 
 export const WallPosts = (props:propsType) => {
 
+let postElement = props.state.postData.map(t =><Post message={t.post} likesCount={t.likesCount}/>)
 
-let postElement = props.state.postData.map(t =>( <Post message={t.post} likesCount={t.likesCount}/>
-
-    ))
-    
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-let addPost = () =>{
+let newPostElement = React.createRef<HTMLTextAreaElement>()
+let addPost = () =>
+{
 if(newPostElement.current){
-    props.addPost(newPostElement.current.value)
-    newPostElement.current.value=""
+    props.dispatch({type:"ADD-POST"})
 }
-}   
+}
 
 const onPostChange = ()=>{
     if(newPostElement.current)
-props.updateNewPostText(newPostElement.current.value)
+props.dispatch({type:"UPDATE-NEW-POST",newText: newPostElement.current.value})
+
 }
 
     return ( 

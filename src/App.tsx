@@ -4,14 +4,13 @@ import {DialogsPage} from './components/dialogspage/dialogspage';
 import {Header} from './components/header/header';
 import {Navbar} from './components/navbar/navbar';
 import {MyPage} from "./components/mypage/mypage";
-import { stateType } from './redux/state';
+import { stateType,ActionsTypes } from './redux/state';
 
 
 type propsType = {
-    
     state:stateType
-    updateNewPostText:(newText:string)=>void
-   addPost:(postText:string)=>void
+    dispatch:(action:ActionsTypes)=>void
+
 }
 
 
@@ -30,7 +29,11 @@ function App(props: propsType) {
                 <Route path="/Dialogs" render={() => <DialogsPage state={props.state.dialogsPage} />}/>
 
 
-                <Route path="/MyPage" render={() => <MyPage profilePage={props.state.profilePage}  addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
+                <Route path="/MyPage" render={() => <MyPage 
+                
+                profilePage={props.state.profilePage}  
+                dispatch={props.dispatch}
+                />}/>
 
             </div>
 

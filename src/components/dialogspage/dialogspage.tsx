@@ -1,8 +1,8 @@
 import classes from './dialogspage.module.css'
 import { DialogItem } from './dialogsitem/dialogsitem'
 import { MessagesItem } from './messagesitem/messagesitem'
-import React, { RefObject } from 'react';
-import state, {DialogsPageType} from '../../redux/state'
+import React from 'react';
+import  {DialogsPageType} from '../../redux/state'
 
 
 type PropsType={
