@@ -1,7 +1,7 @@
 import { Post } from "./Post/post"
 import React from 'react';
 import classes from "./WallPosts.module.css"
-import  {ProfilePageType,ActionsTypes} from "../../../redux/state";
+import  {ProfilePageType,ActionsTypes,AddPostActionCreator,changeNewTextAC} from "../../../redux/state";
 
 
 
@@ -11,6 +11,9 @@ type propsType =
        dispatch:(action:ActionsTypes)=>void
     }
 
+ 
+
+  
 
 export const WallPosts = (props:propsType) => {
 
@@ -20,13 +23,15 @@ let newPostElement = React.createRef<HTMLTextAreaElement>()
 let addPost = () =>
 {
 if(newPostElement.current){
-    props.dispatch({type:"ADD-POST"})
+    props.dispatch(AddPostActionCreator())
 }
 }
 
 const onPostChange = ()=>{
+    
     if(newPostElement.current)
-props.dispatch({type:"UPDATE-NEW-POST",newText: newPostElement.current.value})
+   
+props.dispatch(changeNewTextAC(newPostElement.current.value))
 
 }
 
