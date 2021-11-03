@@ -1,7 +1,8 @@
 import { Post } from "./Post/post"
 import React from 'react';
 import classes from "./WallPosts.module.css"
-import  {ProfilePageType,ActionsTypes,AddPostActionCreator,changeNewTextAC} from "../../../redux/state";
+import  {AddPostActionCreator,changeNewTextAC,ActionsTypes} from "../../../redux/store";
+import { ProfilePageType } from "../../../redux/store";
 
 
 

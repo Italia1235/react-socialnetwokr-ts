@@ -1,7 +1,7 @@
 import classes from './mypage.module.css'
 import { ProfileInfo } from './WallPost/ProfileInfo/profileinfo'
 import { WallPosts } from './WallPost/wallPosts'
-import {ProfilePageType,ActionsTypes} from "../../redux/state";
+import {ProfilePageType,ActionsTypes} from "../../redux/store";
 
 
 type propsType = {

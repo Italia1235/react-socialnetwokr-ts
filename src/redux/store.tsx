@@ -1,3 +1,6 @@
+import { dialogsReducer } from "./Dialogs-reducer"
+import { profileReducer } from "./Profile-reducer"
+
 export type postType = {
     id:number,
     post:string,
@@ -31,9 +34,10 @@ export type StoreType ={
     getState:()=>stateType
     dispatch:(action:ActionsTypes)=>void
 }
-
 type AddPostActionType = ReturnType <typeof AddPostActionCreator>
 type ChangeNewText = ReturnType <typeof changeNewTextAC>
+
+
 type UpdateNewMessageTextType = ReturnType <typeof newMessageBodyAC>
 type SendMessageType = ReturnType <typeof sendMessageAC>
 export type ActionsTypes = AddPostActionType|ChangeNewText|UpdateNewMessageTextType|SendMessageType
@@ -59,13 +63,9 @@ export const store ={
        ],
         messagesData: [
             {id:1,message:"How are you,budy"},
-    
             {id:2,message:"Whats up bro?"},
-    
             {id:3,message:"You free today??"},],
-
         newMessageBody: "" 
-
     }
     },
     getState()
@@ -76,37 +76,16 @@ export const store ={
             this._callSubs = observer
         },
         dispatch(action){
-            if(action.type ==='ADD-POST')
-            {
-                const newPost: postType = {
-                    id:5,  post: this._state.profilePage.newPostText, likesCount:0
-                }
-                    this._state.profilePage.postData.push(newPost)
-                    this._state.profilePage.newPostText=''
-                    this._callSubs()
-            }
-            else if (action.type ==="UPDATE-NEW-POST")
-            {
-                this._state.profilePage.newPostText=action.newText
-                this._callSubs()
-            }
-            else if(action.type==="UPDATE-NEW_MESSAGE_TEXT"){
-                
-                this._state.dialogsPage.newMessageBody=action.newText
-                this._callSubs()
-                console.log(action.newText)
-            }
-            else if (action.type==="SEND-MESSAGE"){
-                const body = {id:6,message:this._state.dialogsPage.newMessageBody}
-                this._state.dialogsPage.newMessageBody=""
-                this._state.dialogsPage.messagesData.push(body)
-                this._callSubs()
-                
-            }
+           this._state.profilePage= profileReducer(this._state.profilePage,action)
+           this._state.dialogsPage= dialogsReducer(this._state.dialogsPage,action)
+           this._callSubs()
+          
+            
         }
 }
 
-export const AddPostActionCreator = () => ( {type:"ADD-POST"}) as const
-export const changeNewTextAC = (newText)=>({type:"UPDATE-NEW-POST",newText:newText }) as const
+
 export const sendMessageAC = () =>({type:"SEND-MESSAGE"}) as const
 export const newMessageBodyAC = (newText)=>({type:"UPDATE-NEW_MESSAGE_TEXT",newText:newText}) as const
+export const AddPostActionCreator = () => ( {type:"ADD-POST"}) as const
+export const changeNewTextAC = (newText)=>({type:"UPDATE-NEW-POST",newText:newText }) as const

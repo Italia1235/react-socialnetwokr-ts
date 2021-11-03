@@ -4,7 +4,7 @@ import {DialogsPage} from './components/dialogspage/dialogspage';
 import {Header} from './components/header/header';
 import {Navbar} from './components/navbar/navbar';
 import {MyPage} from "./components/mypage/mypage";
-import { stateType,ActionsTypes,StoreType } from './redux/state';
+import { stateType,ActionsTypes,StoreType } from './redux/store';
 
 
 type propsType = {
