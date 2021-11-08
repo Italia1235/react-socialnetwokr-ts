@@ -21,7 +21,6 @@ export const profileReducer = (state = initialState,action:ActionsTypes):Profile
     state.newPostText=''
 return state
 
-
     case "UPDATE-NEW-POST":  
     state.newPostText=action.newText
     return state
