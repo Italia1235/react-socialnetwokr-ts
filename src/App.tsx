@@ -4,13 +4,12 @@ import {DialogsPage} from './components/dialogspage/dialogspage';
 import {Header} from './components/header/header';
 import {Navbar} from './components/navbar/navbar';
 import {MyPage} from "./components/mypage/mypage";
-import { stateType,ActionsTypes } from './redux/store';
-import { AppStateType } from './redux/redux-store';
+import {ActionsTypes } from './redux/store';
+import { AppStateType, StoreType } from './redux/redux-store';
 
 
 type propsType = {
-    store:AppStateType
-    
+    store:StoreType
     dispatch:(action:ActionsTypes)=>void
 }
 
@@ -20,7 +19,8 @@ function App(props: propsType) {
             <Header/>
             <Navbar/>
             <div className="content">
-                <Route path="/Dialogs" render={() => <DialogsPage  store={props.store}/>}/>
+                <Route path="/Dialogs" render={() => <DialogsPage  
+                store={props.store}/>}/>
                 <Route path="/MyPage" render={() => <MyPage 
                 profilePage={props.store.getState()}  
                 dispatch={props.dispatch}

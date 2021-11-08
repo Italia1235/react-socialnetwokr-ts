@@ -2,12 +2,12 @@ import classes from './dialogspage.module.css'
 import { DialogItem } from './dialogsitem/dialogsitem'
 import { MessagesItem } from './messagesitem/messagesitem'
 import {ChangeEvent} from 'react';
-import  {newMessageBodyAC,sendMessageAC,StoreType} from '../../redux/store'
-import { AppStateType } from '../../redux/redux-store';
+import  {ActionsTypes, newMessageBodyAC,sendMessageAC} from '../../redux/store'
+import { AppStateType,StoreType} from '../../redux/redux-store';
 
 
 type PropsType={
-    store:AppStateType
+    store:StoreType
 }
 
 
@@ -30,7 +30,7 @@ export const DialogsPage = (props:PropsType) =>{
         <div className={classes.dialogsArea}>
         <div>{dialogsElements} </div>
         <div>{messagesElemets} </div>
-<input value={props.store.getState().dialogsPage.newMessageBody} placeholder="enter your message" onChange={onChangeValueMessage} ></input>
+<input value={state.dialogsPage.newMessageBody} placeholder="enter your message" onChange={onChangeValueMessage} ></input>
 <div><button onClick={addMessage}>Отправить</button></div>
         </div>
     )

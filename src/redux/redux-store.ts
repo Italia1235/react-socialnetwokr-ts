@@ -3,7 +3,9 @@ import { profileReducer } from './Profile-reducer';
 import { combineReducers, createStore } from "redux"
 
 type RootReducersType = typeof rootReducers
-export type AppStateType = typeof store
+export type AppStateType = ReturnType <RootReducersType>
+
+export type StoreType = typeof store
 
 const rootReducers = combineReducers({profilePage:profileReducer
     ,dialogsPage:dialogsReducer})
