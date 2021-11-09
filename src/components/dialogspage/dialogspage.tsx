@@ -2,36 +2,37 @@ import classes from './dialogspage.module.css'
 import { DialogItem } from './dialogsitem/dialogsitem'
 import { MessagesItem } from './messagesitem/messagesitem'
 import {ChangeEvent} from 'react';
-import  {ActionsTypes, newMessageBodyAC,sendMessageAC} from '../../redux/store'
-import { AppStateType,StoreType} from '../../redux/redux-store';
+import  { newMessageBodyAC,sendMessageAC} from '../../redux/store'
+import { AppStateType, StoreType} from '../../redux/redux-store';
 
 
 type PropsType={
-    store:StoreType
+    state:AppStateType
+    addMessage:()=>void
+    onChangeValueMessage:(text:string)=>void
 }
 
 
 export const DialogsPage = (props:PropsType) =>{
-    let state = props.store.getState();
-    {console.log(state)}
-    let messagesElemets = state.dialogsPage.dialogsData.map(t=>(<MessagesItem id={t.id} message={t.name}/>))
-    let dialogsElements = state.dialogsPage.messagesData.map(e=>( <DialogItem  id={e.id} name={e.message}/>))
+   
+    let messagesElemets = props.state.dialogsPage.dialogsData.map(t=>(<MessagesItem id={t.id} message={t.name}/>))
+    let dialogsElements = props.state.dialogsPage.messagesData.map(e=>( <DialogItem  id={e.id} name={e.message}/>))
     
-    const addMessage = ( ) =>{ 
-    props.store.dispatch(sendMessageAC())
+    const callbackAddMessage = ( ) =>{ 
+    props.addMessage()
     }
 
-    const onChangeValueMessage =(e:ChangeEvent<HTMLInputElement>)=>{
+    const onChangeValueMessageCallback =(e:ChangeEvent<HTMLInputElement>)=>{
        
       
-       props.store.dispatch(newMessageBodyAC(e.currentTarget.value)) 
+      props.onChangeValueMessage((e.currentTarget.value)) 
     }
     return (
         <div className={classes.dialogsArea}>
         <div>{dialogsElements} </div>
         <div>{messagesElemets} </div>
-<input value={state.dialogsPage.newMessageBody} placeholder="enter your message" onChange={onChangeValueMessage} ></input>
-<div><button onClick={addMessage}>Отправить</button></div>
+<input value={props.state.dialogsPage.newMessageBody} placeholder="enter your message" onChange={onChangeValueMessageCallback} ></input>
+<div><button onClick={callbackAddMessage}>Отправить</button></div>
         </div>
     )
 }

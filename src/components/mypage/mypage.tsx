@@ -1,8 +1,9 @@
 import classes from './mypage.module.css'
 import { ProfileInfo } from './WallPost/ProfileInfo/profileinfo'
 import { WallPosts } from './WallPost/wallPosts'
-import {ProfilePageType,ActionsTypes} from "../../redux/store";
+import {ActionsTypes} from "../../redux/store";
 import { AppStateType } from '../../redux/redux-store';
+import { WallPostsContainer } from './WallPost/wallPostContainer';
 
 
 type propsType = {
@@ -13,7 +14,7 @@ export const MyPage = (props:propsType) => {
     return (
 <div className={classes.mypage}>
 <ProfileInfo/>
-<WallPosts  
+<WallPostsContainer 
 state={props.profilePage}
 dispatch={props.dispatch}/>
         </div>)

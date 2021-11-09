@@ -6,6 +6,7 @@ import {Navbar} from './components/navbar/navbar';
 import {MyPage} from "./components/mypage/mypage";
 import {ActionsTypes } from './redux/store';
 import { AppStateType, StoreType } from './redux/redux-store';
+import { DialogsPageContainer } from './components/dialogspage/dialogspageContainer';
 
 
 type propsType = {
@@ -19,7 +20,7 @@ function App(props: propsType) {
             <Header/>
             <Navbar/>
             <div className="content">
-                <Route path="/Dialogs" render={() => <DialogsPage  
+                <Route path="/Dialogs" render={() => <DialogsPageContainer 
                 store={props.store}/>}/>
                 <Route path="/MyPage" render={() => <MyPage 
                 profilePage={props.store.getState()}  
