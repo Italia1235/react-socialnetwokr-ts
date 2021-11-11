@@ -1,25 +1,31 @@
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import { AppStateType } from "../../../redux/redux-store";
-import  {AddPostActionCreator,changeNewTextAC,ActionsTypes} from "../../../redux/store";
+import  {AddPostActionCreator,changeNewTextAC, ProfilePageType} from "../../../redux/store";
 import { WallPosts } from "./wallPosts";
 
 
-type propsType =
-    {
- state:AppStateType
-       dispatch:(action:ActionsTypes)=>void
+
+type MapStateToPropsType ={
+    profilePage:ProfilePageType
+}
+
+export type MapProfilePageType =  MapStateToPropsType & MapDispatchPropsType
+type MapDispatchPropsType ={
+    onPostChange:(text:string)=>void
+    addPost: ()=>void
+}
+
+const mapStateToProps = (state:AppStateType )=>{
+return{
+    profilePage:state.profilePage
+}
+}
+const mapDispatchToProps =(dispatch:Dispatch) =>{
+    return{
+        onPostChange: (text)=> {dispatch(changeNewTextAC(text))},
+        addPost:()=>{dispatch(AddPostActionCreator())}
     }
-export const WallPostsContainer = (props:propsType) => {
+}
 
-    let addPost = () =>
-    {props.dispatch(AddPostActionCreator())}
-    
-    const onPostChange = (text)=>{
-        if(text)
-    props.dispatch(changeNewTextAC(text))
-    }
-
-   return ( 
-<WallPosts updateNewPostText={onPostChange} addPost={addPost} state={props.state}/>
-    )}
-
-    
+export const WallPostsContainer = connect(mapStateToProps,mapDispatchToProps)(WallPosts)

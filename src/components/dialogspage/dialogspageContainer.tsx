@@ -1,31 +1,31 @@
-import classes from './dialogspage.module.css'
-import { DialogItem } from './dialogsitem/dialogsitem'
-import { MessagesItem } from './messagesitem/messagesitem'
-import {ChangeEvent} from 'react';
-import  { newMessageBodyAC,sendMessageAC} from '../../redux/store'
-import { StoreType} from '../../redux/redux-store';
+import  { DialogsPageType, newMessageBodyAC,sendMessageAC} from '../../redux/store'
 import { DialogsPage } from './dialogspage';
+import { connect } from 'react-redux';
+import { AppStateType } from '../../redux/redux-store';
+import { Dispatch } from 'redux';
 
-
-type PropsType={
-    store:StoreType
+type MapStateToPropsType ={
+    dialogsPage:DialogsPageType
 }
 
+export type DialogsPropsType =  MapStateToPropsType & MapDispatchPropsType
+type MapDispatchPropsType ={
+    onChangeValueMessage:(text:string)=>void
+    addMessage: ()=>void}
 
-export const DialogsPageContainer = (props:PropsType) =>{
-    let state = props.store.getState();
-   
-    
-    const addMessage = ( ) =>{ 
-    props.store.dispatch(sendMessageAC())
-    }
-
-    const onChangeValueMessage =(text)=>{
-       
-      
-       props.store.dispatch(newMessageBodyAC(text)) 
-    }
-    return (
-              <DialogsPage  onChangeValueMessage={onChangeValueMessage} addMessage={addMessage} state={state}/>
-    )
+ const mapStateToProps = (state:AppStateType) => { 
+return{
+    dialogsPage:state.dialogsPage
 }
+}
+
+const mapDispatchToProps=(dispatch:Dispatch)=>{
+    debugger
+    return{
+        
+        onChangeValueMessage:(text)=>{ dispatch(newMessageBodyAC(text))},
+        addMessage:()=>{dispatch(sendMessageAC())}
+    }
+}
+
+export const DialogsPageContainer = connect(mapStateToProps,mapDispatchToProps)(DialogsPage)
