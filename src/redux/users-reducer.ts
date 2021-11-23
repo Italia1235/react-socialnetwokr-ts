@@ -4,20 +4,18 @@ const SETUSERS = "SETUSERS"
 
 export type UsersType = {
     id:number
-    photoUrl:string
-    followed:boolean,
-    fullName:string,
-    status:string
-    location:{
-        city:string
-        country: string
+    photos:{
+        small:string|undefined
+        large:string|undefined
     }
+    followed:boolean,
+    name:string,
+    status:string
 }
 
 
 const initialState:InitialStateType = {
         users :[
-        
         ]
 }
 

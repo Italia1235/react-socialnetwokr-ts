@@ -5,7 +5,6 @@ import { Users } from "./users";
 
 export type UsersPropsType =  MapStateToPropsType & MapDispatchPropsType
 
-
 const mapStateToProps = (state) => { 
 return{
     users:state.usersPage.users
