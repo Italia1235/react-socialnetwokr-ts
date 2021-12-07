@@ -18,7 +18,6 @@ function App(props: propsType) {
             <div className="content">
                 <Route path="/Dialogs" render={() => <DialogsPageContainer/>}/>
                 <Route path="/MyPage" render={() => <MyPage  />}/>
-              
                 <Route path="/users" render={() => <UsersContainer/>}/>
             </div>
 

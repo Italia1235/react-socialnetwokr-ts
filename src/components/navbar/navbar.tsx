@@ -10,6 +10,7 @@ export const Navbar = () => {
      <div>  <NavLink className={classes.navItem} to="/News">News</NavLink></div> 
      <div>  <NavLink  className={classes.navItem} to="/Friends">Friends</NavLink></div> 
      <div>  <NavLink className={classes.navItem} to="/Music">Music</NavLink></div> 
+     <div>  <NavLink className={classes.navItem} to="/Users">Users</NavLink></div> 
         </nav>
     )
 }
