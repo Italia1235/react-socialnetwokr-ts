@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
 import { AppStateType } from "../../../redux/redux-store";
 import  {AddPostActionCreator,changeNewTextAC, ProfilePageType} from "../../../redux/store";
 import { WallPosts } from "./wallPosts";
@@ -21,11 +20,9 @@ return{
     profilePage:state.profilePage
 }
 }
-const mapDispatchToProps =(dispatch:Dispatch) =>{
-    return{
-        onPostChange: (text)=> {dispatch(changeNewTextAC(text))},
-        addPost:()=>{dispatch(AddPostActionCreator())}
-    }
-}
 
-export const WallPostsContainer = connect(mapStateToProps,mapDispatchToProps)(WallPosts)
+
+export const WallPostsContainer = connect(mapStateToProps,{
+    onPostChange: changeNewTextAC,
+    addPost:AddPostActionCreator
+})(WallPosts)

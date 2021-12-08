@@ -2,7 +2,6 @@ import  { DialogsPageType, newMessageBodyAC,sendMessageAC} from '../../redux/sto
 import { DialogsPage } from './dialogspage';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
-import { Dispatch } from 'redux';
 
 type MapStateToPropsType ={
     dialogsPage:DialogsPageType
@@ -19,13 +18,7 @@ return{
 }
 }
 
-const mapDispatchToProps=(dispatch:Dispatch)=>{
-    debugger
-    return{
-        
-        onChangeValueMessage:(text)=>{ dispatch(newMessageBodyAC(text))},
-        addMessage:()=>{dispatch(sendMessageAC())}
-    }
-}
 
-export const DialogsPageContainer = connect(mapStateToProps,mapDispatchToProps)(DialogsPage)
+export const DialogsPageContainer = connect(mapStateToProps,{ 
+    onChangeValueMessage:newMessageBodyAC,
+    addMessage:sendMessageAC})(DialogsPage)
