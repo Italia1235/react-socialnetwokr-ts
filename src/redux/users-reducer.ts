@@ -13,7 +13,6 @@ export type UsersType = {
     status:string
 }
 
-
 const initialState:InitialStateType = {
         users :[],
         pageSize: 5,
@@ -85,7 +84,7 @@ return { ...state,isLoading:action.isLoading}
 
 export const followAc = (userId) => ({type:FOLLOW,userId})
 export const unfollowAC = (userId)=> ({type:UNFOLLOW,userId})
-export const setUsersAC = (users) => ({type:SETUSERS,users})
+export const setUsersAC = (users:UsersType[]) => ({type:SETUSERS,users})
 export const setCurrentPageAC = (currentPage) => ({type:"SET-CURRENT-PAGE",currentPage})
 export const setTotalUsersCountAC = (totalCount) =>({type:'SET-TOTAL-COUNT',totalCount})
 export const isPreloderingAC = (isLoading) =>({type:'IS-PRELODING',isLoading})

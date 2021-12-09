@@ -1,5 +1,22 @@
-import { ActionsTypes,dialogsType, messagesType } from './store';
 
+export type messagesType={
+    id:number,
+    message:string
+}
+export type dialogsType={
+    id:number,
+    name:string
+}
+
+export type DialogsPageType = {
+    dialogsData: dialogsType[]
+    messagesData: messagesType[]
+    newMessageBody:string
+ }
+ type UpdateNewMessageTextType = ReturnType <typeof newMessageBodyAC>
+ type SendMessageType = ReturnType <typeof sendMessageAC>
+
+ export type ActionsTypes = UpdateNewMessageTextType|SendMessageType
 const initialState:InitialStateType = {
    
         dialogsData :[
@@ -39,3 +56,5 @@ export const dialogsReducer = (state = initialState,action:ActionsTypes):Initial
 
    
 }
+export const sendMessageAC = () =>({type:"SEND-MESSAGE"}) as const
+export const newMessageBodyAC = (newText)=>({type:"UPDATE-NEW_MESSAGE_TEXT",newText:newText}) as const

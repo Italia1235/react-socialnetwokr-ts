@@ -22,7 +22,7 @@ export type MapStateToPropsType ={
 export type MapDispatchPropsType ={
     follow:(userId:number)=>void
     unfollow:(userId:number)=>void
-    setUser:any
+    setUser:(users:UsersType[])=>void
     isLoadingStart:(isLoading) =>void
 }
 

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
+import { ProfilePageType,AddPostActionCreator,changeNewTextAC } from "../../../redux/Profile-reducer";
 import { AppStateType } from "../../../redux/redux-store";
-import  {AddPostActionCreator,changeNewTextAC, ProfilePageType} from "../../../redux/store";
 import { WallPosts } from "./wallPosts";
 
 

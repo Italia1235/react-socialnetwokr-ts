@@ -1,15 +1,13 @@
 import classes from './mypage.module.css'
 import { ProfileInfo } from './WallPost/ProfileInfo/profileinfo'
-import { WallPostsContainer } from './WallPost/wallPostContainer';
+import {WallPostsContainer } from './WallPost/wallPostContainer';
 
 
-type propsType = {
-        }
-
-export const MyPage = (props:propsType) => {
+export const MyPage = (props) => {
     return (
 <div className={classes.mypage}>
-<ProfileInfo/>
+<ProfileInfo profile={props.profile} />
+{console.log(props)}
 <WallPostsContainer/>
         </div>)
 }

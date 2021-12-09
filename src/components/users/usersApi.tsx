@@ -2,7 +2,6 @@ import axios from "axios"
 import {UsersType} from "../../redux/users-reducer"
 import React from 'react'
 import { Users } from "./users"
-
 import { Preloader } from "../common/Preloader/Preloader"
 interface UsersProps {
     users:UsersType[]
@@ -15,7 +14,7 @@ interface UsersProps {
     setCurrentPage:(currentPage:number)=>void
     setTotalUsersCount:(totalCount:number)=>void
     isLoadingStart:(isLoading) =>void
-    setUser:any}
+    setUser:(users:UsersType[])=>void}
 
   export class UsersApi extends React.Component<UsersProps> { 
     

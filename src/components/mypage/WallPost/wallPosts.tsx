@@ -1,6 +1,6 @@
 import { Post } from "./Post/post"
 import React from 'react';
-import classes from "./WallPosts.module.css"
+import styles from "./WallPosts.module.css"
 import { MapProfilePageType } from "./wallPostContainer";
 
 export const WallPosts = (props:MapProfilePageType) => {
@@ -19,8 +19,9 @@ props.onPostChange(newPostElement.current.value)
 
     return ( 
         <div>
-<div><textarea onChange={onPostChange} value={props.profilePage.newPostText} ref={newPostElement} className={classes.textar} placeholder ="Write youre..."></textarea></div>
-<div ><button onClick={onAddPost} className={classes.button}>Add post</button>     </div>
+<div><textarea onChange={onPostChange} 
+value={props.profilePage.newPostText} ref={newPostElement} className={styles.textar} placeholder ="Write youre..."></textarea></div>
+<div ><button onClick={onAddPost} className={styles.button}>Add post</button>     </div>
 {postElement}
         </div>
         

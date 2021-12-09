@@ -1,16 +1,18 @@
-import { ActionsTypes, ProfilePageType } from "./store"
 
-
+export type postType = {
+    id:number,
+    post:string,
+    likesCount:number
+}
 const initialState ={
         postData : [
             {id:1, post: "I learn React! ", likesCount:12},
             {id:2, post: "I like my mother :3",likesCount:1 }, ],
-            newPostText: ""
+            newPostText: "",
+            profile:null,
 }
 
-
 export const profileReducer = (state = initialState,action:ActionsTypes):ProfilePageType=>{ 
-
     switch(action.type)
     {
     case "ADD-POST":  
@@ -21,8 +23,28 @@ export const profileReducer = (state = initialState,action:ActionsTypes):Profile
       case "UPDATE-NEW-POST":  
     return {...state,newPostText:action.newText}
 
+    case "SET-USER-PROFILE":
+        
+            return{...state,profile:action.profile}
+
 default: return  state 
 
     }
 }
+type AddPostActionType = ReturnType <typeof AddPostActionCreator>
+type ChangeNewTextType = ReturnType <typeof changeNewTextAC>
+type setUserMyPageTtype = ReturnType <typeof setUserMyPageAC>
 
+export type ActionsTypes = AddPostActionType|ChangeNewTextType|setUserMyPageTtype
+
+
+export type ProfilePageType = { 
+    postData: postType[];
+    newPostText: string
+    profile:any
+}
+
+export const AddPostActionCreator = () => ( {type:"ADD-POST"}) as const
+export const changeNewTextAC = (newText:string)=>({type:"UPDATE-NEW-POST",newText }) as const
+export const setUserMyPageAC= (profile)=>(
+    {type:"SET-USER-PROFILE",profile}) as const

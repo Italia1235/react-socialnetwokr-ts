@@ -1,7 +1,8 @@
-import  { DialogsPageType, newMessageBodyAC,sendMessageAC} from '../../redux/store'
+
 import { DialogsPage } from './dialogspage';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
+import { DialogsPageType, newMessageBodyAC,sendMessageAC } from '../../redux/Dialogs-reducer';
 
 type MapStateToPropsType ={
     dialogsPage:DialogsPageType
