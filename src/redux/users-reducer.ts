@@ -48,7 +48,6 @@ type isPreloderingACType={
 
 type ActionsType  = followAcType|unfollowACType|SetUsersType|setCurrentPage|setTotalUsersCount|isPreloderingACType
 
-
 type InitialStateType = {
   users:UsersType[]
   pageSize:number
@@ -59,11 +58,11 @@ type InitialStateType = {
 export const userReducer = (state = initialState,action:ActionsType):InitialStateType =>{ 
 
     switch(action.type){
- case FOLLOW: return {...state,users:[...state.users].map(u=>{if(u.id===action.userId){return {...u,followed:false} } return u })}
+ case FOLLOW: return {...state,users:[...state.users].map(u=>{if(u.id===action.userId){return {...u,followed:true} } return u })}
 
  case UNFOLLOW:return {...state,users:[...state.users].map(u=>{
     if(u.id===action.userId){
-       return {...u,followed:true}
+       return {...u,followed:false}
     }
    return u
 })}

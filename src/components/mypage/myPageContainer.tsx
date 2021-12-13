@@ -3,20 +3,30 @@ import { MyPage } from './mypage';
 import axios from 'axios';
 import { connect } from "react-redux";
 import { ProfilePageType, setUserMyPageAC } from '../../redux/Profile-reducer';
+import { RouteComponentProps, withRouter } from 'react-router';
 export type MapProfilePageType =  MapStateToPropsType & MapDispatchPropsType
 type MapStateToPropsType ={
-        profilePage:ProfilePageType
+        profile:ProfilePageType
     }
-    type MapDispatchPropsType ={
+type MapDispatchPropsType ={
         setUserMyPageAC:(profile)=>void
     }
+type PathParamsType = {
+    userId:string
+}
+type CommonPropsType =RouteComponentProps<PathParamsType>&MapProfilePageType
 
 
-class MyPageContainer extends React.Component{
+class MyPageContainer extends React.Component<CommonPropsType,{}>{
 componentDidMount(){
-         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/20`)
+    let userId = this.props.match.params.userId
+    if(!userId){
+        userId="2"
+    }
+         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
          .then(res =>{
-            setUserMyPageAC(res.data)
+            this.props.setUserMyPageAC(res.data)
+        
                      })}
 
     render(){
@@ -25,4 +35,6 @@ componentDidMount(){
 const mapStateToProps = (state)=>({
     profile:state.profilePage.profile})
 
- export default connect (mapStateToProps,{setUserMyPageAC}) (MyPageContainer)
+ const WithUrlMyPageContComponent = withRouter(MyPageContainer)
+
+ export default connect (mapStateToProps,{setUserMyPageAC}) (WithUrlMyPageContComponent)

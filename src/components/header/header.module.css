@@ -11,3 +11,12 @@
   .header img{width: 60px; border-radius: 80%; float:right}
 
   
+.loginBlock{
+  float:right
+}
+  
+.loginBlock a{
+ color:whitesmoke;
+ text-decoration: none;
+}
+  

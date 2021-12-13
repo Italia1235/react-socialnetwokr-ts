@@ -48,3 +48,4 @@ export const AddPostActionCreator = () => ( {type:"ADD-POST"}) as const
 export const changeNewTextAC = (newText:string)=>({type:"UPDATE-NEW-POST",newText }) as const
 export const setUserMyPageAC= (profile)=>(
     {type:"SET-USER-PROFILE",profile}) as const
+    

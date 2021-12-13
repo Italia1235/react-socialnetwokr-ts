@@ -7,7 +7,6 @@ export const MyPage = (props) => {
     return (
 <div className={classes.mypage}>
 <ProfileInfo profile={props.profile} />
-{console.log(props)}
-<WallPostsContainer/>
+<WallPostsContainer />
         </div>)
 }

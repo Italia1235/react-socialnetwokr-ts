@@ -2,6 +2,7 @@ import styles from './users.module.css'
 import userPhoto from '../../pic/avatar.jpg'
 import { UsersType } from '../../redux/users-reducer'
 import {NavLink} from 'react-router-dom'
+import axios from 'axios'
 type propsType = {
     users:UsersType[]
     usersCount:number
@@ -23,7 +24,7 @@ export const Users = (props:propsType) =>{
 
     return  <div> 
     <div>
-       {pages.map(p=>{ return<span onClick={()=>{props.onPageChanged(p)}} className=
+       {pages.map(p=>{ return<span  onClick={()=>{props.onPageChanged(p)}} className=
        {props.currentPage===p?styles.selectedPage:""}>{p}</span>})}
     </div>
           {
@@ -35,10 +36,34 @@ export const Users = (props:propsType) =>{
     ? u.photos.small : userPhoto} className={styles.userPhoto}/>
     </NavLink>
 </div>
+
 <div>
-   {u.followed?<button onClick={()=>props.follow(u.id)}>unFollow</button> 
-   : <button onClick={()=>props.unFollow(u.id)}>Follow</button> }
- 
+   {u.followed?<button onClick={()=>
+   axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+   {withCredentials:true,
+   headers:{'API-KEY':"26b2ff93-1b6c-416a-a42e-45366ec3f6b0"}},).then(res =>{
+      if(res.data.resultCode===0){
+         debugger
+         props.unFollow(u.id)
+      }
+      
+  })}>unFollow</button> 
+   : 
+   <button onClick={()=>
+      axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`
+      ,{},{withCredentials:true,
+      headers:{"API-KEY":"26b2ff93-1b6c-416a-a42e-45366ec3f6b0"}}).then(res =>{
+         if(res.data.resultCode===0){
+            props.follow(u.id)
+         }
+
+
+
+    
+         
+     })}>
+     Follow</button> 
+}
 </div>
 </span>
 <span>
