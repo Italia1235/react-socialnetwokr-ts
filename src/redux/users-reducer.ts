@@ -8,9 +8,10 @@ export type UsersType = {
         small:string|undefined
         large:string|undefined
     }
-    followed:boolean,
-    name:string,
+    followed:boolean
+    name:string
     status:string
+   
 }
 
 const initialState:InitialStateType = {
@@ -18,7 +19,8 @@ const initialState:InitialStateType = {
         pageSize: 5,
         totalCount: 0,
         currentPage:1,
-        isLoading: true
+        isLoading: true,
+        disableButton:[]
 }
 
 type followAcType = {
@@ -45,8 +47,9 @@ type isPreloderingACType={
     type:'IS-PRELODING',
     isLoading:boolean
 }
+type disableButtonType = ReturnType <typeof disableButtonAC>
 
-type ActionsType  = followAcType|unfollowACType|SetUsersType|setCurrentPage|setTotalUsersCount|isPreloderingACType
+type ActionsType  = followAcType|unfollowACType|SetUsersType|setCurrentPage|setTotalUsersCount|isPreloderingACType|disableButtonType
 
 type InitialStateType = {
   users:UsersType[]
@@ -54,6 +57,7 @@ type InitialStateType = {
   totalCount:number
   currentPage:number
   isLoading:boolean
+  disableButton: number[]
 }
 export const userReducer = (state = initialState,action:ActionsType):InitialStateType =>{ 
 
@@ -76,6 +80,16 @@ return {...state,totalCount:action.totalCount}
 
 case"IS-PRELODING":
 return { ...state,isLoading:action.isLoading}
+
+case"DISABLE-BUTTON":
+return {
+    ...state,
+    disableButton: action.disable?
+[...state.disableButton,action.userId]:
+state.disableButton.filter(el=> el !== action.userId)
+}
+
+
  default:return state
 
 }   
@@ -87,3 +101,4 @@ export const setUsersAC = (users:UsersType[]) => ({type:SETUSERS,users})
 export const setCurrentPageAC = (currentPage) => ({type:"SET-CURRENT-PAGE",currentPage})
 export const setTotalUsersCountAC = (totalCount) =>({type:'SET-TOTAL-COUNT',totalCount})
 export const isPreloderingAC = (isLoading) =>({type:'IS-PRELODING',isLoading})
+export const disableButtonAC = (disable,userId) =>({type:"DISABLE-BUTTON",disable, userId} as const)

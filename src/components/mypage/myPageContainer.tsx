@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { ProfilePageType, setUserMyPageAC } from '../../redux/Profile-reducer';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { getProfile } from '../../api/api';
 export type MapProfilePageType =  MapStateToPropsType & MapDispatchPropsType
 type MapStateToPropsType ={
         profile:ProfilePageType
@@ -23,7 +24,7 @@ componentDidMount(){
     if(!userId){
         userId="2"
     }
-         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
+    getProfile(userId)
          .then(res =>{
             this.props.setUserMyPageAC(res.data)
         

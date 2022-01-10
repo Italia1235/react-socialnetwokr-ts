@@ -1,24 +1,27 @@
-import axios from "axios"
 import {UsersType} from "../../redux/users-reducer"
 import React from 'react'
 import { Users } from "./users"
 import { Preloader } from "../common/Preloader/Preloader"
+import { usersAPI } from "../../api/api"
+
 interface UsersProps {
     users:UsersType[]
     usersCount:number
     pageSize:number
     currentPage:number
     isLoading: boolean
+    disableButton:number[]
     follow: (userId:number)=>void
     unfollow:(userId:number)=>void
     setCurrentPage:(currentPage:number)=>void
     setTotalUsersCount:(totalCount:number)=>void
     isLoadingStart:(isLoading) =>void
-    setUser:(users:UsersType[])=>void}
+    setUser:(users:UsersType[])=>void
+    disableButtonAC:(disable,userId)=>void
+}
 
   export class UsersApi extends React.Component<UsersProps> { 
-    
-         followAd = (userId:number)=>{
+            followAd = (userId:number)=>{
             this.props.follow(userId)
           }
            unFollowAd = (userId:number)=>{
@@ -26,20 +29,18 @@ interface UsersProps {
           }
 
     componentDidMount() {        
-        this.props.isLoadingStart(true)
-         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
-            ${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials:true}).then(res =>{
+     this.props.isLoadingStart(true)
+        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then(data =>{
             this.props.isLoadingStart(false)
-            this.props.setUser(res.data.items)
-            this.props.setTotalUsersCount(res.data.totalCount)
+            this.props.setUser(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
     })
 }   
-onPageChanged = (p:number)=>{
+onPageChanged = (page:number)=>{
     this.props.isLoadingStart(true)
-    this.props.setCurrentPage(p)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
-            ${p}&count=${this.props.pageSize}`).then(res =>{
-            this.props.setUser(res.data.items)
+    this.props.setCurrentPage(page)
+    usersAPI.getUsers(page,this.props.pageSize).then(data =>{
+            this.props.setUser(data.items)
             this.props.isLoadingStart(false)
     })
 }
@@ -54,6 +55,8 @@ onPageChanged = (p:number)=>{
                     unFollow={this.unFollowAd}
                     users={this.props.users}
                     currentPage={this.props.currentPage}
+                    disableButtonAC={this.props.disableButtonAC}
+                    disableButton = {this.props.disableButton}
         /> </>
     }
 }

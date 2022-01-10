@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { followAc, isPreloderingAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, UsersType } from "../../redux/users-reducer";
+import { disableButtonAC, followAc, isPreloderingAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, UsersType } from "../../redux/users-reducer";
 import { UsersApi } from "./usersApi";
 
 export type UsersPropsType =  MapStateToPropsType & MapDispatchPropsType
@@ -10,7 +10,8 @@ return{
     pageSize: state.usersPage.pageSize,
     usersCount: state.usersPage.totalCount,
     currentPage:state.usersPage.currentPage,
-    isLoading:state.usersPage.isLoading
+    isLoading:state.usersPage.isLoading,
+    disableButton:state.usersPage.disableButton
 }
 }
 export type MapStateToPropsType ={ 
@@ -18,6 +19,7 @@ export type MapStateToPropsType ={
     pageSize:number
     usersCount:number
     isLoading:boolean
+    disableButton:number[]
 }
 export type MapDispatchPropsType ={
     follow:(userId:number)=>void
@@ -34,5 +36,6 @@ export type MapDispatchPropsType ={
                       setUser: setUsersAC,
                       setCurrentPage:setCurrentPageAC,
                       setTotalUsersCount:setTotalUsersCountAC,
-                      isLoadingStart: isPreloderingAC}
+                      isLoadingStart: isPreloderingAC,
+                      disableButtonAC:disableButtonAC}
 ) (UsersApi)
