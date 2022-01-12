@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { disableButtonAC, followAc, isPreloderingAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, UsersType } from "../../redux/users-reducer";
+import { disableButtonAC, followAc, followUserThunkCreator, getUsersThunkCreator, isPreloderingAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, unFollowUserThunkCreator, UsersType } from "../../redux/users-reducer";
 import { UsersApi } from "./usersApi";
 
 export type UsersPropsType =  MapStateToPropsType & MapDispatchPropsType
@@ -33,9 +33,10 @@ export type MapDispatchPropsType ={
     export const UsersContainer = connect
     (mapStateToProps,{follow: followAc,
                       unfollow:unfollowAC,
-                      setUser: setUsersAC,
-                      setCurrentPage:setCurrentPageAC,
+                                            setCurrentPage:setCurrentPageAC,
                       setTotalUsersCount:setTotalUsersCountAC,
-                      isLoadingStart: isPreloderingAC,
-                      disableButtonAC:disableButtonAC}
+                                         disableButtonAC:disableButtonAC,
+                      getUsersThunkCreator:getUsersThunkCreator,
+                      followUser:followUserThunkCreator,
+                      unFollowUser:unFollowUserThunkCreator}
 ) (UsersApi)

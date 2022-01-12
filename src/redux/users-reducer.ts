@@ -1,3 +1,5 @@
+import { FollowUser, unFollowUser, usersAPI } from "../api/api"
+import {Dispatch} from "redux";
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SETUSERS = "SETUSERS"
@@ -15,12 +17,12 @@ export type UsersType = {
 }
 
 const initialState:InitialStateType = {
-        users :[],
-        pageSize: 5,
-        totalCount: 0,
-        currentPage:1,
-        isLoading: true,
-        disableButton:[]
+    users :[],
+    pageSize: 7,
+    totalCount: 0,
+    currentPage:1,
+    isLoading: true,
+    disableButton:[]
 }
 
 type followAcType = {
@@ -73,8 +75,9 @@ export const userReducer = (state = initialState,action:ActionsType):InitialStat
 
 case SETUSERS: 
 return {...state,users:[...action.users]}
-case "SET-CURRENT-PAGE":
+case "SET-CURRENT-PAGE":{
     return {...state,currentPage:action.currentPage}
+    }
 case"SET-TOTAL-COUNT":
 return {...state,totalCount:action.totalCount}
 
@@ -102,3 +105,37 @@ export const setCurrentPageAC = (currentPage) => ({type:"SET-CURRENT-PAGE",curre
 export const setTotalUsersCountAC = (totalCount) =>({type:'SET-TOTAL-COUNT',totalCount})
 export const isPreloderingAC = (isLoading) =>({type:'IS-PRELODING',isLoading})
 export const disableButtonAC = (disable,userId) =>({type:"DISABLE-BUTTON",disable, userId} as const)
+
+export const getUsersThunkCreator = (currentPage,pageSize)=> { 
+  return  (dispatch:Dispatch) => {
+    dispatch(isPreloderingAC(true))
+    usersAPI.getUsers(currentPage,pageSize).then(data =>{
+        dispatch(isPreloderingAC(false))
+        dispatch(setUsersAC(data.items))
+        dispatch(setTotalUsersCountAC(data.totalCount))
+})
+  }
+}
+
+export const followUserThunkCreator = (userId)=> { 
+    return  (dispatch:Dispatch) => {
+    dispatch( disableButtonAC(true,userId))
+      unFollowUser(userId).then(res =>{
+        if(res.data.resultCode===0){
+    dispatch(unfollowAC(userId))
+        } 
+    dispatch( disableButtonAC(false,userId))
+    })}
+}
+
+
+export const unFollowUserThunkCreator = (userId)=> { 
+    return  (dispatch:Dispatch) => {
+    dispatch( disableButtonAC(true,userId))
+      FollowUser(userId).then(res =>{
+        if(res.data.resultCode===0){
+    dispatch(followAc(userId))
+        } 
+    dispatch( disableButtonAC(false,userId))
+    })}
+}

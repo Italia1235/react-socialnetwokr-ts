@@ -24,3 +24,8 @@ export const unFollowUser = (id) =>{
 export const FollowUser = (id) =>{ 
     return instanse.post(`follow/${id}`)
 }
+
+export const autCont = () => {
+    return instanse.get(`auth/me`)
+
+}

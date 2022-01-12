@@ -2,7 +2,7 @@ import {UsersType} from "../../redux/users-reducer"
 import React from 'react'
 import { Users } from "./users"
 import { Preloader } from "../common/Preloader/Preloader"
-import { usersAPI } from "../../api/api"
+
 
 interface UsersProps {
     users:UsersType[]
@@ -15,9 +15,10 @@ interface UsersProps {
     unfollow:(userId:number)=>void
     setCurrentPage:(currentPage:number)=>void
     setTotalUsersCount:(totalCount:number)=>void
-    isLoadingStart:(isLoading) =>void
-    setUser:(users:UsersType[])=>void
     disableButtonAC:(disable,userId)=>void
+    getUsersThunkCreator:(currentPage:number,pageSize:number) =>void
+    followUser:(userId:number) =>void
+    unFollowUser:(userId:number) =>void
 }
 
   export class UsersApi extends React.Component<UsersProps> { 
@@ -29,20 +30,12 @@ interface UsersProps {
           }
 
     componentDidMount() {        
-     this.props.isLoadingStart(true)
-        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then(data =>{
-            this.props.isLoadingStart(false)
-            this.props.setUser(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-    })
+     this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
+    
 }   
 onPageChanged = (page:number)=>{
-    this.props.isLoadingStart(true)
-    this.props.setCurrentPage(page)
-    usersAPI.getUsers(page,this.props.pageSize).then(data =>{
-            this.props.setUser(data.items)
-            this.props.isLoadingStart(false)
-    })
+        this.props.getUsersThunkCreator(page,this.props.pageSize)
+    
 }
 
     render (){
@@ -55,8 +48,9 @@ onPageChanged = (page:number)=>{
                     unFollow={this.unFollowAd}
                     users={this.props.users}
                     currentPage={this.props.currentPage}
-                    disableButtonAC={this.props.disableButtonAC}
                     disableButton = {this.props.disableButton}
+                    unFollowUser={this.props.unFollowUser}
+                    followUser={this.props.followUser}
         /> </>
     }
 }

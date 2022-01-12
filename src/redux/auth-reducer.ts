@@ -1,3 +1,6 @@
+import { Dispatch } from "redux"
+import { autCont } from "../api/api"
+
 export const initialState:initialStatetype ={ 
     userId:null,
     email:null,
@@ -27,3 +30,20 @@ export const authReducer =(state=initialState,action:ActionType):initialStatetyp
 
 
 export const AuthSetAc = (userId,login,email) => ({type:"AUTH-SET-USER",data:{userId,login,email}}) as const
+
+export const AuthSetThunkCreator = () => 
+{
+    return (dispatch:Dispatch) => 
+    {
+        autCont()
+    .then(res =>
+        {
+        if(res.data.resultCode===0)
+        {
+       let {id,login,email} = res.data.data
+          dispatch(AuthSetAc(id,login,email))
+        }})}}
+          
+          
+    
+    

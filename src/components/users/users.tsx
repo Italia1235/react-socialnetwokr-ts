@@ -2,7 +2,7 @@ import styles from './users.module.css'
 import userPhoto from '../../pic/avatar.jpg'
 import { UsersType } from '../../redux/users-reducer'
 import {NavLink} from 'react-router-dom'
-import { FollowUser, unFollowUser } from '../../api/api'
+
 type propsType = {
     users:UsersType[]
     usersCount:number
@@ -12,7 +12,8 @@ type propsType = {
     follow: (userId:number)=>void
     unFollow:(userId:number)=>void
     onPageChanged:(p:number)=>void
-    disableButtonAC:(disable:boolean,userId:number)=>void
+    followUser:(userId:number) =>void
+    unFollowUser:(userId:number) =>void
 }
 
 
@@ -24,11 +25,10 @@ export const Users = (props:propsType) =>{
         pages.push(i);
     }
 
-
     return  <div> 
     <div>
-       {pages.map(p=>{ return<span  onClick={()=>{props.onPageChanged(p)}} className=
-       {props.currentPage===p?styles.selectedPage:""}>{p}</span>})}
+    {pages.map(p=>{ return<span  onClick={()=>{props.onPageChanged(p)}} className=
+       {props.currentPage==p?styles.selectedPage:""}>{p}</span>})}
     </div>
           {
    props.users.map(u=> <div key={u.id}>
@@ -41,23 +41,12 @@ export const Users = (props:propsType) =>{
 </div>
 
 <div>
-   {u.followed?<button disabled={props.disableButton.some(id=>id===u.id)} onClick={()=>{
-  props.disableButtonAC(true,u.id)
-   unFollowUser(u.id).then(res =>{
-      if(res.data.resultCode===0){
-               props.unFollow(u.id)
-      } 
-      props.disableButtonAC(false,u.id)     
-   })}}>unFollow</button> 
+   {u.followed?<button 
+   disabled={props.disableButton.some(id=>id===u.id)} onClick={()=>{
+ props.followUser(u.id)}}>unFollow</button> 
    : 
    <button disabled={props.disableButton.some(id=>id===u.id)} onClick={()=>{
-      props.disableButtonAC(true,u.id)
-      FollowUser(u.id).then(res =>{
-         if(res.data.resultCode===0){
-            props.follow(u.id)
-         }
-         props.disableButtonAC(false,u.id)         
-     })}}>
+     props.unFollowUser(u.id)}}>
      Follow</button> 
 }
 </div>

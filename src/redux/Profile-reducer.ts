@@ -1,3 +1,5 @@
+import { Dispatch } from 'redux';
+import { getProfile } from '../api/api';
 
 export type postType = {
     id:number,
@@ -21,10 +23,11 @@ export const profileReducer = (state = initialState,action:ActionsTypes):Profile
 ],newPostText:""}
  
       case "UPDATE-NEW-POST":  
+
     return {...state,newPostText:action.newText}
 
     case "SET-USER-PROFILE":
-        
+    
             return{...state,profile:action.profile}
 
 default: return  state 
@@ -48,4 +51,12 @@ export const AddPostActionCreator = () => ( {type:"ADD-POST"}) as const
 export const changeNewTextAC = (newText:string)=>({type:"UPDATE-NEW-POST",newText }) as const
 export const setUserMyPageAC= (profile)=>(
     {type:"SET-USER-PROFILE",profile}) as const
-    
+export const getProfileThunkCreator = (userId) => { 
+    return (dispatch:Dispatch) =>{
+        getProfile(userId)
+        .then(res =>{
+           dispatch(setUserMyPageAC(res.data))
+
+                    })
+    }
+}
