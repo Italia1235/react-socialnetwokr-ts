@@ -2,11 +2,14 @@ import React from 'react'
 import { MyPage } from './mypage';
 import { connect } from "react-redux";
 import { ProfilePageType, getProfileThunkCreator, setUserMyPageAC } from '../../redux/Profile-reducer';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import { RedirectHOC } from '../../hoc/AuthRedirect';
+import { compose } from 'redux';
 
 export type MapProfilePageType =  MapStateToPropsType & MapDispatchPropsType
 type MapStateToPropsType ={
         profile:ProfilePageType
+        isAuth:boolean
     }
 type MapDispatchPropsType ={
         setUserMyPageAC:(profile)=>void
@@ -29,11 +32,20 @@ componentDidMount(){
     }
 
     render(){
+      
                    return <MyPage  {...this.props}/>    }
 }
+
+
+
 const mapStateToProps = (state)=>({
-    profile:state.profilePage.profile})
+    profile:state.profilePage.profile,
+    isAuth:state.auth.isAuth})
 
- const WithUrlMyPageContComponent = withRouter(MyPageContainer)
+    
 
- export default connect (mapStateToProps,{setUserMyPageAC,getProfileThunkCreator}) (WithUrlMyPageContComponent)
+
+
+ export default  compose<React.ComponentType>
+ (connect(mapStateToProps,{setUserMyPageAC,getProfileThunkCreator}),
+ withRouter,RedirectHOC)(MyPageContainer)

@@ -1,13 +1,13 @@
 import { Dispatch } from "redux"
 import { autCont } from "../api/api"
 
-export const initialState:initialStatetype ={ 
+export const initialState:initialAuthStatetype ={ 
     userId:null,
     email:null,
     login:null,
-    isAuth:true
+    isAuth:false
 }
-export type initialStatetype = {
+export type initialAuthStatetype = {
     userId:string|null
     email:string|null
     login:string|null
@@ -18,7 +18,7 @@ export type AuthSetAcType = ReturnType<typeof AuthSetAc>
  
 export type ActionType = AuthSetAcType
 
-export const authReducer =(state=initialState,action:ActionType):initialStatetype => { 
+export const authReducer =(state=initialState,action:ActionType):initialAuthStatetype => { 
 
     switch(action.type){
   case "AUTH-SET-USER":

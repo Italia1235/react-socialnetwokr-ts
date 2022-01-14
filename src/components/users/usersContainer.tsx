@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { RedirectHOC } from "../../hoc/AuthRedirect";
 import { disableButtonAC, followAc, followUserThunkCreator, getUsersThunkCreator, isPreloderingAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, unFollowUserThunkCreator, UsersType } from "../../redux/users-reducer";
 import { UsersApi } from "./usersApi";
 
@@ -29,8 +30,7 @@ export type MapDispatchPropsType ={
 }
 
 
-
-    export const UsersContainer = connect
+    export const UsersContainer = RedirectHOC(connect
     (mapStateToProps,{follow: followAc,
                       unfollow:unfollowAC,
                                             setCurrentPage:setCurrentPageAC,
@@ -39,4 +39,4 @@ export type MapDispatchPropsType ={
                       getUsersThunkCreator:getUsersThunkCreator,
                       followUser:followUserThunkCreator,
                       unFollowUser:unFollowUserThunkCreator}
-) (UsersApi)
+) (UsersApi))

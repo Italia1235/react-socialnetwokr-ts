@@ -3,10 +3,12 @@ import { DialogItem } from './dialogsitem/dialogsitem'
 import { MessagesItem } from './messagesitem/messagesitem'
 import {ChangeEvent} from 'react';
 import { DialogsPropsType } from './dialogspageContainer';
+import { Redirect } from 'react-router';
 
 
 
 export const DialogsPage = (props:DialogsPropsType) =>{
+   
    
     let messagesElemets = props.dialogsPage.dialogsData.map(t=>(<MessagesItem id={t.id} message={t.name}/>))
     let dialogsElements = props.dialogsPage.messagesData.map(e=>( <DialogItem  id={e.id} name={e.message}/>))
@@ -17,6 +19,7 @@ export const DialogsPage = (props:DialogsPropsType) =>{
     const onChangeValueMessageCallback =(e:ChangeEvent<HTMLInputElement>)=>{
       props.onChangeValueMessage((e.currentTarget.value)) 
     }
+   
     return (
         <div className={classes.dialogsArea}>
         <div>{dialogsElements} </div>
