@@ -2,7 +2,7 @@ import React from 'react'
 import { MyPage } from './mypage';
 import { connect } from "react-redux";
 import { ProfilePageType, getProfileThunkCreator, setUserMyPageAC } from '../../redux/Profile-reducer';
-import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import {  RouteComponentProps, withRouter } from 'react-router';
 import { RedirectHOC } from '../../hoc/AuthRedirect';
 import { compose } from 'redux';
 

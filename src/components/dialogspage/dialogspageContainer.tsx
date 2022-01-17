@@ -1,4 +1,3 @@
-
 import { DialogsPage } from './dialogspage';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
@@ -14,7 +13,7 @@ type MapStateToPropsType ={
     auth:boolean
 }
 
-
+export let Dialog
 
 export type DialogsPropsType =  MapStateToPropsType & MapDispatchPropsType
 type MapDispatchPropsType ={
@@ -28,7 +27,7 @@ return{
 }
 }
 
-export default compose <React.ComponentType> (connect(mapStateToProps,{ 
+export default Dialog = compose <React.ComponentType> (connect(mapStateToProps,{ 
     onChangeValueMessage:newMessageBodyAC,
     addMessage:sendMessageAC},RedirectHOC(DialogsPage)))
 
