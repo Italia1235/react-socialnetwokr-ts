@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RedirectHOC } from "../../hoc/AuthRedirect";
-import { disableButtonAC, followAc, followUserThunkCreator, getUsersThunkCreator, isPreloderingAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, unFollowUserThunkCreator, UsersType } from "../../redux/users-reducer";
+import { disableButtonAC, followAc, followUserThunkCreator, getUsersThunkCreator,  setCurrentPageAC, setTotalUsersCountAC,  unfollowAC, unFollowUserThunkCreator, UsersType } from "../../redux/users-reducer";
 import { UsersApi } from "./usersApi";
 
 export type UsersPropsType =  MapStateToPropsType & MapDispatchPropsType

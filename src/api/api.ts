@@ -18,6 +18,10 @@ export const getProfile = (userId) => {
     return instanse.get(`profile/`+userId)
 }
 
+export const getStatus = (userId) => {
+    return instanse.get(`profile/status/` +userId)
+}
+
 export const unFollowUser = (id) =>{ 
     return instanse.delete(`follow/${id}`)
 }
@@ -28,4 +32,8 @@ export const FollowUser = (id) =>{
 export const autCont = () => {
     return instanse.get(`auth/me`)
 
+}
+
+export const updateStatus = (status) => {
+    return instanse.put(`profile/status`,{status})
 }

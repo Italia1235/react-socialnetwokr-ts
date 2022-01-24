@@ -8,7 +8,7 @@ export const MyPage = (props) => {
     return (
 <div className={classes.mypage}>
 <ProfileInfo profile={props.profile} />
-<ProfileStatus/>
+<ProfileStatus status={props.status} updateStatusThunk={props.updateStatusThunk}/>
 <WallPostsContainer />
 
         </div>)

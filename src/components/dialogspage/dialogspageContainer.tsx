@@ -18,7 +18,8 @@ export let Dialog
 export type DialogsPropsType =  MapStateToPropsType & MapDispatchPropsType
 type MapDispatchPropsType ={
     onChangeValueMessage:(text:string)=>void
-    addMessage: ()=>void}
+    addMessage: ()=>void
+}
 
  const mapStateToProps = (state:AppStateType) => { 
 return{

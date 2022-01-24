@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { getProfile } from '../api/api';
+import { getProfile, getStatus, updateStatus } from '../api/api';
 
 export type postType = {
     id:number,
@@ -12,6 +12,7 @@ const initialState ={
             {id:2, post: "I like my mother :3",likesCount:1 }, ],
             newPostText: "",
             profile:null,
+            status:""
 }
 
 export const profileReducer = (state = initialState,action:ActionsTypes):ProfilePageType=>{ 
@@ -30,6 +31,9 @@ export const profileReducer = (state = initialState,action:ActionsTypes):Profile
     
             return{...state,profile:action.profile}
 
+    case 'SET-STATUS' :
+        return {...state,status:action.status}
+
 default: return  state 
 
     }
@@ -37,16 +41,19 @@ default: return  state
 type AddPostActionType = ReturnType <typeof AddPostActionCreator>
 type ChangeNewTextType = ReturnType <typeof changeNewTextAC>
 type setUserMyPageTtype = ReturnType <typeof setUserMyPageAC>
+type setStatusType = ReturnType <typeof setStatusAC>
 
-export type ActionsTypes = AddPostActionType|ChangeNewTextType|setUserMyPageTtype
+export type ActionsTypes = AddPostActionType|ChangeNewTextType|setUserMyPageTtype|
+setStatusType
 
 
 export type ProfilePageType = { 
     postData: postType[];
     newPostText: string
     profile:any
+    status:string
 }
-
+export const setStatusAC = (status) => ({type:"SET-STATUS",status}as const)
 export const AddPostActionCreator = () => ( {type:"ADD-POST"}) as const
 export const changeNewTextAC = (newText:string)=>({type:"UPDATE-NEW-POST",newText }) as const
 export const setUserMyPageAC= (profile)=>(
@@ -56,7 +63,13 @@ export const getProfileThunkCreator = (userId) => {
         getProfile(userId)
         .then(res =>{
            dispatch(setUserMyPageAC(res.data))
-
                     })
     }
 }
+export const getStatusThunk = (userId) => (dispatch:Dispatch) =>{
+getStatus(userId).then(res => dispatch(setStatusAC(res.data)))
+}
+export const updateStatusThunk = (status) => (dispatch:Dispatch) =>{
+    updateStatus(status).then(res => { if (res.data.resultCode ===0)
+        {dispatch(setStatusAC(status))}})
+    }

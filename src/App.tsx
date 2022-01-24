@@ -6,13 +6,10 @@ import {UsersContainer} from './components/users/usersContainer';
 import MyPageContainer from './components/mypage/myPageContainer';
 import HeaderContainer from './components/header/HeaderContainer';
 import { Login } from './components/login/login';
-import React from 'react';
 
 
-type propsType = {
-}
 
-function App(props: propsType) {
+function App() {
     return (
         <div className="App">
             <HeaderContainer/>

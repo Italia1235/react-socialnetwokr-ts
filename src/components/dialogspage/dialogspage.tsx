@@ -3,7 +3,6 @@ import { DialogItem } from './dialogsitem/dialogsitem'
 import { MessagesItem } from './messagesitem/messagesitem'
 import {ChangeEvent} from 'react';
 import { DialogsPropsType } from './dialogspageContainer';
-import { Redirect } from 'react-router';
 
 
 
