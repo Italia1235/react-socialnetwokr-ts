@@ -5,7 +5,7 @@ import {Dialog} from './components/dialogspage/dialogspageContainer';
 import {UsersContainer} from './components/users/usersContainer';
 import MyPageContainer from './components/mypage/myPageContainer';
 import HeaderContainer from './components/header/HeaderContainer';
-import { Login } from './components/login/login';
+import  Login from './components/login/login';
 
 
 

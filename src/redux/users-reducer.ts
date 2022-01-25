@@ -13,7 +13,6 @@ export type UsersType = {
     followed:boolean
     name:string
     status:string
-   
 }
 
 const initialState:InitialStateType = {

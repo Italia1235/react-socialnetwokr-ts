@@ -37,3 +37,10 @@ export const autCont = () => {
 export const updateStatus = (status) => {
     return instanse.put(`profile/status`,{status})
 }
+
+export const loginApi = (email,password,rememberMe =false) => {
+    return instanse.post(`auth/login`,{email,password,rememberMe})}
+
+    export const logoutApi = () => {
+        return instanse.delete(`auth/login`)}
+    

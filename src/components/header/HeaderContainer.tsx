@@ -10,7 +10,7 @@ export interface MapToPropsType {
     login:string|null
 }
 export interface MapDispatch {
-    AuthSetAc:(userId,login,email)=>void
+    AuthSetAc:(userId,login,email,isAuth?)=>void
     AuthSetThunkCreator:()=>void
 }
 
