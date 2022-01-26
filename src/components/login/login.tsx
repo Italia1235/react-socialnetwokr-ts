@@ -43,15 +43,17 @@ interface Values {
     }
   
     return (
-      <div>
+      <form onSubmit={formik.handleSubmit} > 
           
         <h1>Signup</h1>
         <div>
-        <label>login</label>
+
+        <label>email</label>
         <input type="email" {...formik.getFieldProps('email')}/>
         {formik.touched.email && formik.errors.email
                     ? <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
                     </div>
+
                     <div>
         <label>password</label>
         <input type="password" {...formik.getFieldProps('password')}/>
@@ -60,9 +62,9 @@ interface Values {
         </div>
 
 <input type="checkbox"/>
-        <button>login</button>
+        <button type="submit">login</button>
          
-      </div>
+      </form>
     );
         }
 
